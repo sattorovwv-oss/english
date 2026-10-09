@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="1000 английских слов и выражений с русским и таджикским переводом. Ищите слова, слушайте произношение и учитесь с карточками в LUGAT.">
+  <title>LUGAT — английский ближе</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%232f5aff'/%3E%3Cpath d='M22 16v32h24V37H33V16Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="words.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#dictionary" data-i18n="skip">Перейти к словарю</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Навигация">
+      <a class="brand" href="./" aria-label="LUGAT"><span class="brand-mark">l.</span><span>LUGAT<span class="brand-sub">a word, a world.</span></span></a>
+      <div class="sidebar-label" data-i18n="yourSpace">ТВОЁ ПРОСТРАНСТВО</div>
+      <nav class="main-nav">
+        <button class="nav-item active" data-view="all"><span data-icon="book"></span><span data-i18n="dictionary">Словарь</span><span class="nav-count">1000</span></button>
+        <button class="nav-item" data-view="saved"><span data-icon="bookmark"></span><span data-i18n="saved">Избранное</span><span class="nav-count" id="saved-count">0</span></button>
+        <button class="nav-item" data-view="learned"><span data-icon="checkCircle"></span><span data-i18n="learned">Изученные</span><span class="nav-count" id="learned-count">0</span></button>
+        <button class="nav-item" id="nav-practice"><span data-icon="layers"></span><span data-i18n="practice">Тренировка</span><span class="nav-new" data-i18n="cards">карточки</span></button>
+      </nav>
+      <div class="sidebar-progress">
+        <div class="progress-heading"><span data-i18n="yourProgress">Твой прогресс</span><span data-icon="sparkles"></span></div>
+        <div class="progress-big"><span id="progress-value">0</span><span class="progress-total">/ 1000</span></div>
+        <div class="progress-track"><div id="progress-fill"></div></div>
+        <p id="progress-note">Каждое новое слово — шаг вперёд.</p>
+      </div>
+      <div class="sidebar-bottom"><span class="mini-monogram">EN</span><p data-i18n="sidebarNote">Один словарь.<br>Три языка. Тысяча возможностей.</p></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">l.</span><b>LUGAT</b></div>
+        <div class="breadcrumb"><span data-icon="globe"></span><span data-i18n="englishDictionary">Английский словарь</span><span class="breadcrumb-slash">/</span><span data-i18n="personalLibrary">Твоя библиотека</span></div>
+        <div class="topbar-actions">
+          <label class="language-control"><span data-icon="languages"></span><select id="ui-language" aria-label="Язык интерфейса"><option value="ru">RU</option><option value="tj">TJ</option><option value="en">EN</option></select></label>
+          <button class="icon-button theme-button" id="theme-toggle" aria-label="Переключить тему"><span data-icon="moon"></span></button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="intro">
+          <div class="intro-copy"><span class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="dailyLittle">НЕМНОГО АНГЛИЙСКОГО КАЖДЫЙ ДЕНЬ</span></span>
+            <h1 data-i18n="headline">Большой мир<br>начинается со <span>слова.</span></h1>
+            <p data-i18n="intro">Находи, слушай и запоминай. 1000 слов и выражений с переводом на русский и тоҷикӣ.</p>
+            <div class="language-pills"><span>English <b>EN</b></span><span>Русский <b>RU</b></span><span>Тоҷикӣ <b>TJ</b></span></div>
+          </div>
+          <article class="daily-card" id="daily-card"><div class="daily-top"><span><span data-icon="sparkles"></span><span data-i18n="wordOfDay">СЛОВО ДНЯ</span></span><span class="daily-day" id="daily-date"></span></div><div class="daily-word" id="daily-en"></div><div class="daily-pron" id="daily-pron"></div><div class="daily-translations"><span id="daily-ru" lang="ru"></span><span id="daily-tj" lang="tg"></span></div><button class="daily-play" id="daily-listen"><span data-icon="volume"></span><span data-i18n="listen">Послушать</span></button><span class="daily-index" id="daily-index"></span></article>
+        </section>
+
+        <section class="dictionary-section" id="dictionary" aria-label="Словарь">
+          <div class="section-heading"><div><h2 id="view-title">Твой словарь<span class="title-dot">.</span></h2><span class="result-count" id="result-count" role="status" aria-live="polite"></span></div><button class="practice-button" id="practice-start"><span data-icon="layers"></span><span data-i18n="practice20">Повторить 20 слов</span></button></div>
+          <div class="search-panel"><span class="search-icon" data-icon="search"></span><label class="sr-only" for="search" data-i18n="searchLabel">Поиск по трём языкам</label><input type="search" id="search" autocomplete="off" placeholder="Какое слово ищем? English, русский или тоҷикӣ…"><button class="search-clear icon-button" id="search-clear" aria-label="Очистить поиск" hidden><span data-icon="close"></span></button><kbd class="search-kbd">/</kbd></div>
+          <div class="filter-toolbar">
+            <div class="filters-left"><label class="chapter-filter"><span data-icon="grid"></span><select id="chapter" aria-label="Часть словаря"></select></label><label class="sort-filter"><span data-icon="sort"></span><select id="sort" aria-label="Сортировка"><option value="original">По порядку</option><option value="az">A → Z</option><option value="za">Z → A</option></select></label></div>
+            <div class="filters-right"><button class="translation-toggle" id="translation-toggle" aria-pressed="false"><span data-icon="eye"></span><span data-i18n="hideTranslations">Скрыть перевод</span></button><div class="view-toggle" role="group" aria-label="Вид словаря"><button class="active" id="grid-view" aria-label="Карточки" aria-pressed="true"><span data-icon="grid"></span></button><button id="list-view" aria-label="Список" aria-pressed="false"><span data-icon="list"></span></button></div></div>
+          </div>
+          <div class="word-grid" id="word-grid"></div>
+          <div class="empty-state" id="empty-state" hidden><span data-icon="search"></span><h3 id="empty-title"></h3><p id="empty-text"></p><button class="secondary-button" id="reset-filters" data-i18n="resetFilters">Сбросить фильтры</button></div>
+          <div class="load-more-wrap" id="load-more-wrap"><p id="shown-count"></p><button class="load-more" id="load-more"><span data-i18n="showMore">Ещё 24 слова</span><span data-icon="plus"></span></button></div>
+        </section>
+        <footer class="footer"><a class="footer-brand" href="./">LUGAT<span>.</span></a><span data-i18n="footerNote">Учись в своём ритме.</span><span class="source-credit" id="source-credit"></span></footer>
+      </div>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="Навигация"><button class="active" data-view="all"><span data-icon="book"></span><span data-i18n="dictionary">Словарь</span></button><button data-view="saved"><span data-icon="bookmark"></span><span data-i18n="saved">Избранное</span></button><button data-view="learned"><span data-icon="checkCircle"></span><span data-i18n="learned">Изученные</span></button><button id="mobile-practice"><span data-icon="layers"></span><span data-i18n="practice">Тренировка</span></button></nav>
+  <dialog id="practice-dialog" class="practice-dialog"><div class="practice-dialog-inner"><div class="dialog-top"><span class="eyebrow" data-i18n="practiceEyebrow">ВРЕМЯ ПОВТОРИТЬ</span><button class="icon-button" id="close-practice" aria-label="Закрыть"><span data-icon="close"></span></button></div><div id="practice-content"></div></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
